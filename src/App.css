@@ -1,38 +1,187 @@
-.App {
-  text-align: center;
+.montserrat-subrayada-regular {
+  font-family: "Montserrat Subrayada", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.montserrat-subrayada-bold {
+  font-family: "Montserrat Subrayada", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to right top, #c6fced, #80e3e7, #1bc6eb, #00a6ef, #0080e6, #007be2, #0076dd, #0071d9, #008bda, #009fca, #00aeb5, #68baa6);
+}
+
+div {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.main-layout {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.nav_bar {
+  position: absolute;
+  top: 0px;
+  margin: 10px;
+  width: 100vw;
+  height: 46px;
+}
+.nav_bar .app_logo {
+  margin-left: 15px;
+  width: 46px;
+  height: 46px;
+  filter: invert(86%) sepia(30%) saturate(218%) hue-rotate(108deg) brightness(106%) contrast(98%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calculator_layout {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.4509803922);
+  color: #C6FCED;
+  border-radius: 15px;
+  align-items: center;
 }
+.calculator_layout h1 {
+  margin: 0px;
+  padding: 20px;
+  font-size: 45px;
+  text-align: center;
+  font-family: "Montserrat Subrayada", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.calculator_layout .calculate_box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calculator_layout .calculate_box button {
+  font-weight: bold;
+  color: #C6FCED;
+  width: 90px;
+  height: 35px;
+  background-color: #5042C1;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 5s ease-in-out;
+}
+.calculator_layout .calculate_box button:hover {
+  background-color: #68BAA6;
+}
+.calculator_layout #calculator-input {
+  border: #68BAA6;
+  border-radius: 5px;
+  width: 260px;
+  height: 35px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  padding-left: 10px;
+}
+.calculator_layout .to_inch_box {
+  position: absolute;
+  right: -78px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calculator_layout .to_inch_box input {
+  width: auto;
+  height: auto;
+}
+.calculator_layout .to_inch_box h3 {
+  font-size: 16px;
+  margin: 0 0 0 3px;
+}
+
+.help-layout {
+  position: absolute;
+  top: 242px;
+  left: 228px;
+}
+.help-layout .help-details {
+  padding: 10px;
+  visibility: hidden;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  background-color: #C6FCED;
+  color: #1d1b22;
+  border-radius: 15px;
+  z-index: 50;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.help-layout .help-details h3 {
+  margin-bottom: 0px;
+}
+.help-layout .help-details p {
+  margin-bottom: 10px;
+}
+.help-layout h3 {
+  font-size: 20px;
+}
+
+#ruler_nav-layout {
+  color: #5042C1;
+  margin-top: 36px;
+  margin-bottom: 10px;
+  z-index: 20;
+}
+#ruler_nav-layout nav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: black;
+}
+#ruler_nav-layout a {
+  text-decoration: none;
+  width: 200px;
+  text-align: center;
+}
+#ruler_nav-layout h3 {
+  font-weight: bold;
+  font-size: 16px;
+}
+#ruler_nav-layout p {
+  font-size: 16px;
+}
+#ruler_nav-layout i {
+  font-size: 36px;
+}
+
+@media screen and (max-width: 768px) {
+  .ruler_nav-layout a {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    top: 75px;
+    color: blue;
+  }
+}/*# sourceMappingURL=App.css.map */
