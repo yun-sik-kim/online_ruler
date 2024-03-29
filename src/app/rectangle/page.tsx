@@ -1,5 +1,4 @@
-import Image from "next/image";
-import "./globals.css";
+import "./rectangle.css";
 import { MeasureInput, Tooltip } from "./logics";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +10,7 @@ export default function Home() {
     <div className='main-layout'>
       <div className='ui-layout'>
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
-        <MeasureInput className='calculate_box' rulerType='ruler'>
+        <MeasureInput className='calculate_box' rulerType='2d_box'>
           <h3>to inch</h3>
         </MeasureInput>
         <Tooltip className='metric-tooltip'>
