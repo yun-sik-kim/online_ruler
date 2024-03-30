@@ -1,16 +1,15 @@
 'use client'
-import "./globals.css";
-import { useState } from 'react';
-import { Fragment } from 'react';
+import styles from "./ruler.module.css";
+import { useState, Fragment, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
 
 export function MeasureInput({ className, children }) {
     const [lengthInput, setLengthInput] = useState('');
-    const [isInch, setIsInch] = useState('false');
+    const [isInch, setIsInch] = useState(false);
   
     const accent_color3 = '#F9F871';
-  
+
     const handleInputChange = (e) => {
       let input = e.target.value;
       setLengthInput(input);
@@ -35,19 +34,21 @@ export function MeasureInput({ className, children }) {
   
     const handleInch = () => {
       setIsInch(!isInch);
-      if(isInch) {
-        document.querySelector('#calculator-input').placeholder = 'inch';
-        document.querySelector('.to_inch-checkbox h3').style.color = accent_color3;
-      } else {
-        document.querySelector('#calculator-input').placeholder = 'mm'
-        document.querySelector('.to_inch-checkbox h3').style.color = '';
-      }
     }
+    useEffect(()=>{
+      if(isInch) {
+        document.querySelector(`.${styles.calculator_input}`).placeholder = 'inch';
+        document.querySelector(`.${styles.to_inch_checkbox} h3`).style.color = accent_color3;
+      } else {
+        document.querySelector(`.${styles.calculator_input}`).placeholder = 'mm'
+        document.querySelector(`.${styles.to_inch_checkbox} h3`).style.color = '';
+      }
+    });
 
     return (
         <div className={className}>
           <input
-            className='calculator-input'
+            className={styles.calculator_input}
             onChange={ handleInputChange }
             type="text"
             placeholder="mm"
@@ -57,7 +58,7 @@ export function MeasureInput({ className, children }) {
           <button onClick={ handleCalculateClick }>
             calculate!
           </button>
-          <div className='to_inch-checkbox'>
+          <div className={styles.to_inch_checkbox}>
             <input type="checkbox" onClick={ handleInch } />
             {children}
           </div>     
@@ -67,14 +68,13 @@ export function MeasureInput({ className, children }) {
 
 export function Tooltip({ className, children }) {
     const [isHelp, setIsHelp] = useState(false);
-    const detailsClassName = 'details-tooltip';
 
-    return(
+    return (
       <div className={className}
-        onMouseEnter={()=>{document.querySelector(`.${detailsClassName}`).style.visibility = 'visible';}}
-        onMouseLeave={()=>{document.querySelector(`.${detailsClassName}`).style.visibility = 'hidden';}}>
+        onMouseEnter={()=>{document.querySelector(`.${styles.details_tooltip}`).style.visibility = 'visible';}}
+        onMouseLeave={()=>{document.querySelector(`.${styles.details_tooltip}`).style.visibility = 'hidden';}}>
         <FontAwesomeIcon icon={faCircleQuestion} /><span draggable="false">  cm?</span>
-        <div className={detailsClassName}>
+        <div className={styles.details_tooltip}>
           {children}
         </div>
       </div>

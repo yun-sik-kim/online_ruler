@@ -1,13 +1,13 @@
 'use client'
-import "./rectangle.css";
-import { useState, Fragment } from 'react';
+import styles from "./rectangle.module.css";
+import { useState, Fragment, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
 
 export function MeasureInput({ className, children }) {
     const [widthInput, setWidthInput] = useState('');
     const [heightInput, setHeightInput] = useState('');
-    const [isInch, setIsInch] = useState('false');
+    const [isInch, setIsInch] = useState(false);
   
     const accent_color3 = '#F9F871';
   
@@ -28,7 +28,7 @@ export function MeasureInput({ className, children }) {
         alert("please write number only!");
         setWidthInput('');
         setHeightInput('');
-        console.log(lengthInput);
+        console.log(`${widthInput} ${heightInput}`);
       } else if (widthInput === '' || widthInput === '0') {
         alert("width must be larger than 0!");
         setWidthInput('');
@@ -47,26 +47,25 @@ export function MeasureInput({ className, children }) {
   
     const handleInch = () => {
       setIsInch(!isInch);
-      const inputPlaceholders = document.querySelectorAll('.calculator-input');
+    }
+
+    useEffect(()=>{
+      const inputPlaceholders = document.querySelectorAll(`.${styles.calculator_input}`);
 
       if(isInch) {
-        inputPlaceholders.forEach((input) => {
-          input.setAttribute('placeholder', 'inch');
-        });
-        document.querySelector('.to_inch-checkbox h3').style.color = accent_color3;
+        inputPlaceholders.forEach((input) => {input.setAttribute('placeholder', 'inch');});
+        document.querySelector(`.${styles.to_inch_checkbox} h3`).style.color = accent_color3;
       } else {
-        inputPlaceholders.forEach((input) => {
-          input.setAttribute('placeholder', 'mm');
-        });
-        document.querySelector('.to_inch-checkbox h3').style.color = '';
+        inputPlaceholders.forEach((input) => {input.setAttribute('placeholder', 'mm');});
+        document.querySelector(`.${styles.to_inch_checkbox} h3`).style.color = '';
       }
-    }
+    });
 
     return (
         <div className={className}>
-          <div className='2d_box'>
+          <div className={styles._2d_box}>
             <input
-              className='calculator-input'
+              className={styles.calculator_input}
               onChange={ handleWidthChange }
               type="text"
               placeholder="mm"
@@ -74,7 +73,7 @@ export function MeasureInput({ className, children }) {
               >
             </input>
             <input
-              className='calculator-input'
+              className={styles.calculator_input}
               onChange={ handleHeightChange }
               type="text"
               placeholder="mm"
@@ -85,7 +84,7 @@ export function MeasureInput({ className, children }) {
           <button onClick={ handleCalculateClick }>
             calculate!
           </button>
-          <div className='to_inch-checkbox'>
+          <div className={styles.to_inch_checkbox}>
             <input type="checkbox" onClick={ handleInch } />
             {children}
           </div>     
@@ -95,14 +94,13 @@ export function MeasureInput({ className, children }) {
 
 export function Tooltip({ className, children }) {
     const [isHelp, setIsHelp] = useState(false);
-    const detailsClassName = 'details-tooltip';
 
     return(
       <div className={className}
-        onMouseEnter={()=>{document.querySelector(`.${detailsClassName}`).style.visibility = 'visible';}}
-        onMouseLeave={()=>{document.querySelector(`.${detailsClassName}`).style.visibility = 'hidden';}}>
+        onMouseEnter={()=>{document.querySelector(`.${styles.details_tooltip}`).style.visibility = 'visible';}}
+        onMouseLeave={()=>{document.querySelector(`.${styles.details_tooltip}`).style.visibility = 'hidden';}}>
         <FontAwesomeIcon icon={faCircleQuestion} /><span draggable="false">  cm?</span>
-        <div className={detailsClassName}>
+        <div className={styles.details_tooltip}>
           {children}
         </div>
       </div>

@@ -1,0 +1,180 @@
+$background-color: #C6FCED;
+$main-color: #5042C1;
+$main-color-transparent: #5142c17e;
+$main-color-shadow: #2726A0;
+$accent-color: #68BAA6;
+$accent-color2: #1d1b22;
+$accent-color3: #F9F871;
+$nav_bar_length: 46px;
+
+.ui_layout {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    position: relative;
+    background-color: #ffffff73;
+    color: $background-color;
+    border-radius: 15px;
+    align-items: center;
+    h1 {
+        margin: 0px;
+        padding: 20px;
+        font-size: 45px;
+        text-align: center;
+        font-family: var(--font-montserrat_subrayada);
+        font-weight: 700;
+        font-style: normal;
+    }
+    .calculate_box {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .calculator_input {
+            border: $accent-color;
+            border-radius: 5px;
+            box-sizing: border-box;
+            width: 260px;
+            height: 35px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            font-weight: 550;
+            padding-left: 10px;
+        }
+        button {
+            font-weight: bold;
+            color: $background-color;
+            width: 90px;
+            height: 35px;
+            background-color: $main-color;
+            border: 0;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            // transition: box-shadow 2s ease-in-out;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: $accent-color;
+        }
+        .to_inch_checkbox {
+            position: absolute;
+            // top: 0px;
+            right:-78px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input {
+                width: auto;
+                height: auto;
+            }
+            h3 {
+                font-weight: 400;
+                font-size: 16px;
+                margin: 0 0 0 3px;
+            }
+        }
+    }
+    .metric_tooltip {
+        position: absolute;
+        top: 236px;
+        left: 228px;
+        .details_tooltip {
+            padding: 10px;
+            visibility: hidden;
+            width: 300px;
+            height: 200px;
+            position: absolute;
+            background-color: $background-color;
+            color: $accent-color2;
+            border-radius: 10px;
+            z-index: 50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            h3 {
+                font-size: 16px;
+                margin-bottom: 0px;
+            }
+            p {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    #ruler_nav_layout {
+        color: $main-color;
+        margin-top: 36px;
+        margin-bottom: 10px;
+        z-index: 20;
+        #current {
+            border-top: 3px solid $background-color;
+            color: $main-color;
+            // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            // box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        nav {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            // top: 75px;
+            box-shadow: black;
+        }
+        .icon {
+            color: $main-color-transparent;
+            font-size: 36px;
+            text-decoration: none;
+            width: 200px;
+            text-align: center;
+            text-decoration: none;
+            transition: 0.3s;
+            h2 {
+                margin: 0px;
+                padding-top: 6px;
+                padding-bottom: 2px;
+                font-weight: bold;
+                font-size: 16px;
+            }
+            p {
+                margin: 0;
+                font-size: 16px;
+            }
+        }
+        .icon:hover {
+            color: $main-color;
+            border-top: 3px solid $background-color;
+        }
+        .icon:active {
+            color: $accent-color;
+        }
+    }
+}
+
+
+
+// .show_ruler-layout {
+//     position: absolute;
+//     width: 1000px;
+//     height: 700px;
+//     background-color: #ffffff;
+//     left: 0;
+//     right: 0;
+//     top: 200px;
+//     margin-left: auto;
+//     margin-right: auto;
+//     border-radius: 15px;
+//     z-index: -1;
+// }
+
+// .place_holder {
+//     height: 200px;
+// }
+
+@media screen and (max-width: 768px){
+    .ruler_nav_layout a{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        top: 75px;
+        color: blue;
+    }
+}
