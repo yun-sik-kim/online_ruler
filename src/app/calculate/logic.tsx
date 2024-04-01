@@ -1,5 +1,5 @@
 'use client'
-import styles from "./ruler.module.css";
+import styles from "./calculate.module.css";
 import { useState, Fragment, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,7 @@ export function MeasureInput({ className, children }) {
     const [isInch, setIsInch] = useState(false);
     const accent_color3 = '#F9F871';
 
-    const router = useRouter();
+    // const router = useRouter();
 
     useEffect(()=>{
       let input = document.querySelector(`.${styles.calculator_input}`);
@@ -109,5 +109,29 @@ export function Tooltip({ className, children }) {
           {children}
         </div>
       </div>
+    );
+}
+
+export function ShowRuler({ inputInArray, rulerType }) {
+
+    useEffect(()=>{
+        const innerWidth = window.innerWidth;
+        const innerHeight = window.innerHeight;
+
+
+    });
+
+    if (rulerType === 'ruler') {
+
+    } else if (rulerType === 'box') {
+
+    }
+
+    return (
+        <div className={styles.show_ruler_layout}>
+            <canvas>
+
+            </canvas>
+        </div>
     );
 }
