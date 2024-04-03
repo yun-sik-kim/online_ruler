@@ -12,13 +12,13 @@ export default function Home() {
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
         <MeasureInput className={styles.calculate_box}>
           <h3>to inch</h3>
+          <Tooltip className={styles.metric_tooltip}>
+            <h3>• cm to mm?</h3>
+            <p>1 cm = 10 mm</p>
+            <h3>• m to mm?</h3>
+            <p>1 m = 100 mm</p>
+          </Tooltip>
         </MeasureInput>
-        <Tooltip className={styles.metric_tooltip}>
-          <h3>• cm to mm?</h3>
-          <p>1 cm = 10 mm</p>
-          <h3>• m to mm?</h3>
-          <p>1 m = 100 mm</p>
-        </Tooltip>
         <div id={styles.ruler_nav_layout}>
           <nav>
             <Link className={styles.icon} id={styles.current} href='/'>

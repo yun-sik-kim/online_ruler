@@ -25,7 +25,7 @@ export default function Home() {
             <Link className={styles.icon} href='/'>
               <FontAwesomeIcon icon={faRuler} />
               <h2>ruler</h2>
-              <p>straight line</p>
+              <p>straight line, set your length</p>
             </Link>
             <Link className={styles.icon} id={styles.current} href='/rectangle'>
               <FontAwesomeIcon icon={faSquare} />

@@ -17,7 +17,7 @@ export function MeasureInput({ className, children }) {
       let input = document.querySelector(`.${styles.calculator_input}`);
       let checkbox = document.querySelector(`.${styles.to_inch_checkbox} h3`);
 
-      console.log(Number(lengthInput));
+      // console.log(Number(lengthInput));
       // if (isInch === false && input.vlaue === '') {
         
       // }
@@ -51,7 +51,7 @@ export function MeasureInput({ className, children }) {
         if (isInch === false) {
           setInputMm(Number(input.value));
           alert(`success!!! input value in mmis ${input.value}`);
-          router.push('/calculate');
+          router.push(`/calculate?length=${input.value}`);
         } else if (isInch === true) {
           setInputMm(Number(input.value));
           alert(`success!!! input value in inch is ${input.value}`);//FIX HERE

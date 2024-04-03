@@ -1,9 +1,15 @@
 'use client'
 import styles from "./calculate.module.css";
 import { useState, Fragment, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
+
+// setTimeout(()=>{
+//     const title = document.querySelector(`.${styles.ui_layout} h1`);
+//     title.innerHTML = 'online ruler';
+//     // alert(title);
+// }, 1000);
 
 export function MeasureInput({ className, children }) {
     const [lengthInput, setLengthInput] = useState('');
@@ -11,7 +17,7 @@ export function MeasureInput({ className, children }) {
     const [isInch, setIsInch] = useState(false);
     const accent_color3 = '#F9F871';
 
-    // const router = useRouter();
+    const router = useRouter();
 
     useEffect(()=>{
       let input = document.querySelector(`.${styles.calculator_input}`);
@@ -112,13 +118,42 @@ export function Tooltip({ className, children }) {
     );
 }
 
+
+//TO DO: set a timer that initial looks like main page, and pop up the ShowRuler with visual while scroll down.
 export function ShowRuler({ inputInArray, rulerType }) {
+    const searchParams = useSearchParams();
+    const length = searchParams.get('length');
 
     useEffect(()=>{
-        const innerWidth = window.innerWidth;
-        const innerHeight = window.innerHeight;
+        const screenWidth = window.screen.width;
+        const screenHeight = window.screen.height;
+        console.log(screenWidth + '+' + screenHeight);
 
+        const devicePixelRatio = window.devicePixelRatio;
 
+        const physicalWidthInPixels = screenWidth * devicePixelRatio;
+        const physicalHeightInPixels = screenHeight * devicePixelRatio;
+
+        const physicalWidthInInches = physicalWidthInPixels / 96;
+        const physicalHeightInInches = physicalHeightInPixels / 96;
+
+        const physicalWidthInMm = physicalWidthInInches * 25.4;
+        const physicalHeightInMm = physicalHeightInInches * 25.4;
+
+        console.log(physicalWidthInMm + '+' +physicalHeightInMm);
+
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Set line properties
+        ctx.strokeStyle = "blue"; // Line color
+        ctx.lineWidth = 2; // Line width
+
+        // Draw a line from (10, 30) to (190, 30)
+        ctx.beginPath();
+        ctx.moveTo(10, 100);
+        ctx.lineTo( 204 + 10, 100);
+        ctx.stroke();
     });
 
     if (rulerType === 'ruler') {
@@ -129,9 +164,7 @@ export function ShowRuler({ inputInArray, rulerType }) {
 
     return (
         <div className={styles.show_ruler_layout}>
-            <canvas>
-
-            </canvas>
+            <canvas id="myCanvas" width="500" height="200" style={{ border: '1px solid #000' }}></canvas>
         </div>
     );
 }

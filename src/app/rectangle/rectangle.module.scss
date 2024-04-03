@@ -1,3 +1,4 @@
+// CAN't use @import "./../ruler.module.scss"; as it will do override behaviour which will neutralize .module.css function
 $background-color: #C6FCED;
 $main-color: #5042C1;
 $main-color-transparent: #5142c17e;
@@ -157,23 +158,23 @@ $nav_bar_length: 46px;
 
 
 
-// .show_ruler-layout {
-//     position: absolute;
-//     width: 1000px;
-//     height: 700px;
-//     background-color: #ffffff;
-//     left: 0;
-//     right: 0;
-//     top: 200px;
-//     margin-left: auto;
-//     margin-right: auto;
-//     border-radius: 15px;
-//     z-index: -1;
-// }
+.show_ruler-layout {
+    position: absolute;
+    width: 1000px;
+    height: 700px;
+    background-color: #ffffff;
+    left: 0;
+    right: 0;
+    top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    z-index: -1;
+}
 
-// .place_holder {
-//     height: 200px;
-// }
+.place_holder {
+    height: 200px;
+}
 
 
 
