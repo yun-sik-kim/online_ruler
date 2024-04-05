@@ -125,22 +125,44 @@ export function ShowRuler({ inputInArray, rulerType }) {
     const length = searchParams.get('length');
 
     useEffect(()=>{
-        const screenWidth = window.screen.width;
-        const screenHeight = window.screen.height;
-        console.log(screenWidth + '+' + screenHeight);
+        console.log(window.navigator.platform);
 
-        const devicePixelRatio = window.devicePixelRatio;
+        const displaySizeList = [10.1, 11.6, 12.3, 12.5, 13, 13.3, 13.5, 14, 14.5, 15, 15.6, 16, 17, 17.3, 18.4, 20, 21.5, 23, 24, 27, 32, 34, 38, 42, 49, 55, 65];
+        const AR = [[16, 9], [16, 10], [4, 3], [5, 4], [21, 9], [32, 9]];
+        
 
-        const physicalWidthInPixels = screenWidth * devicePixelRatio;
-        const physicalHeightInPixels = screenHeight * devicePixelRatio;
+        function findDisplaySize(displaySize) {
+            const width = window.screen.width;
+            const height = window.screen.height;
+            console.log(`Your screen resolution is ${width} x ${height}.`);
+            
+            const diagonal = Math.sqrt(width ** 2 + height ** 2);
+            console.log('diagonal: ' + diagonal);
 
-        const physicalWidthInInches = physicalWidthInPixels / 96;
-        const physicalHeightInInches = physicalHeightInPixels / 96;
+            const likelihoodIndex = displaySize.map((size)=>{
+                return Math.abs(size - (diagonal % size));
+            });
+            const minValue = Math.min(...likelihoodIndex);
+            const minIndex = likelihoodIndex.indexOf(minValue);
+            console.log(`your screen is: ${displaySize[minIndex]} inch`);
+        }
+        findDisplaySize(displaySizeList);
 
-        const physicalWidthInMm = physicalWidthInInches * 25.4;
-        const physicalHeightInMm = physicalHeightInInches * 25.4;
+        function findAR() {
+            const nativeWidth = window.screen.width * window.devicePixelRatio;
+            const nativeHeight = window.screen.height * window.devicePixelRatio;
+            const widthRatio = nativeWidth / nativeHeight;
+            const heightRatio = 1;
 
-        console.log(physicalWidthInMm + '+' +physicalHeightInMm);
+            console.log(`Native screen resolution: ${widthRatio} x ${heightRatio}.`);
+        }
+        findAR();
+
+        function findPhysicalMm() {
+
+            return [width, height]
+        }
+        
 
         const canvas = document.getElementById("myCanvas");
         const ctx = canvas.getContext("2d");
