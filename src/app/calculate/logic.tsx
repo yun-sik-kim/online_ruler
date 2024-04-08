@@ -10,6 +10,14 @@ import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
 //     title.innerHTML = 'online ruler';
 //     // alert(title);
 // }, 1000);
+function mmToInch(mm) {
+    let result = mm / 25.4;
+    return result.toFixed(2);
+  }
+
+  function inchToMm(inch) {
+    return (inch * 25.4);
+  }
 
 export function MeasureInput({ className, children }) {
     const [lengthInput, setLengthInput] = useState('');
@@ -73,15 +81,6 @@ export function MeasureInput({ className, children }) {
       setIsInch(!isInch);
     }
 
-    function mmToInch(mm) {
-      let result = mm / 25.4;
-      return result.toFixed(2);
-    }
-
-    function inchToMm(inch) {
-      return (inch * 25.4);
-    }
-
     return (
         <div className={className}>
           <input
@@ -125,42 +124,69 @@ export function ShowRuler({ inputInArray, rulerType }) {
     const length = searchParams.get('length');
 
     useEffect(()=>{
-        console.log(window.navigator.platform);
-
         const displaySizeList = [10.1, 11.6, 12.3, 12.5, 13, 13.3, 13.5, 14, 14.5, 15, 15.6, 16, 17, 17.3, 18.4, 20, 21.5, 23, 24, 27, 32, 34, 38, 42, 49, 55, 65];
-        const AR = [[16, 9], [16, 10], [4, 3], [5, 4], [21, 9], [32, 9]];
-        
-
-        function findDisplaySize(displaySize) {
+        const macDisplaySizeList = [9.7, 10.2, 10.5, 10.9, 11.0, 12.9, 11.6, 12.0, 13.3, 14.0, 15.4, 16.0, 17.0, 21.5, 24.0, 27.0];
+        const displayAspectRatio = [[16, 9], [16, 10], [4, 3], [5, 4], [21, 9], [32, 9]];
+        const ARdevisionTable = displayAspectRatio.map((ratio)=>{
+            return (ratio[0] / ratio[1])
+        });
+        // console.log(ARdevisionTable);
+        function findDisplaySize() {
             const width = window.screen.width;
             const height = window.screen.height;
-            console.log(`Your screen resolution is ${width} x ${height}.`);
-            
+            console.log(`Your screen resolution is ${window.screen.width} x ${window.screen.height}.`);
             const diagonal = Math.sqrt(width ** 2 + height ** 2);
             console.log('diagonal: ' + diagonal);
 
-            const likelihoodIndex = displaySize.map((size)=>{
-                return Math.abs(size - (diagonal % size));
-            });
-            const minValue = Math.min(...likelihoodIndex);
-            const minIndex = likelihoodIndex.indexOf(minValue);
-            console.log(`your screen is: ${displaySize[minIndex]} inch`);
-        }
-        findDisplaySize(displaySizeList);
+            if (navigator.platform.indexOf("Mac") === 0) {
+                const likelihoodIndex = macDisplaySizeList.map((size)=>{
+                    return Math.abs( (diagonal % size)-size); //NEED FIX: find similarity function
+                });
+                likelihoodIndex.map((a, i)=>{
+                    console.log(`${macDisplaySizeList[i]} inch is: ${likelihoodIndex[i]}`);
+                })
+                const minValue = Math.min(...likelihoodIndex);
+                const minIndex = likelihoodIndex.indexOf(minValue);
+                console.log(`your screen is: ${macDisplaySizeList[minIndex]} inch`);
+            } else {
+                const likelihoodIndex = displaySizeList.map((size)=>{
+                    return Math.abs(size - (diagonal % size)); //NEED FIX: find similarity function
+                });
+                likelihoodIndex.map((a, i)=>{
+                    console.log(`${displaySizeList[i]} inch is: ${likelihoodIndex[i]}`);
+                })
+                const minValue = Math.min(...likelihoodIndex);
+                const minIndex = likelihoodIndex.indexOf(minValue);
+                console.log(`your screen is: ${displaySizeList[minIndex]} inch`);
+            }
 
-        function findAR() {
+            
+        }
+        findDisplaySize();
+
+        function findAR(aspectRatio) {
             const nativeWidth = window.screen.width * window.devicePixelRatio;
             const nativeHeight = window.screen.height * window.devicePixelRatio;
-            const widthRatio = nativeWidth / nativeHeight;
-            const heightRatio = 1;
+            const currentRatio = nativeWidth / nativeHeight;
+            console.log('current Ratio: '+ currentRatio);
 
-            console.log(`Native screen resolution: ${widthRatio} x ${heightRatio}.`);
+            const likelihoodIndex = aspectRatio.map((a, i)=>{
+                return Math.abs(currentRatio - ARdevisionTable[i]);
+            });
+            console.log(likelihoodIndex);
+            const minValue = Math.min(...likelihoodIndex);
+            console.log(minValue);
+            const currentARIndex = likelihoodIndex.indexOf(minValue);
+            console.log(currentARIndex)
+            const currentAR = aspectRatio[currentARIndex]
+            console.log(`Aspect Ratio is: ${currentAR[0]} x ${currentAR[1]}.`);
         }
-        findAR();
+        findAR(displayAspectRatio);
 
-        function findPhysicalMm() {
-
-            return [width, height]
+        function findPhysicalMm(displaySize, AR) {
+            const physicalHeight = inchToMm(displaySize) / (Math.sqrt(AR ** 2 + 1));
+            const physicalWidth = AR * physicalHeight;
+            console.log(`your computer's physical width is:${physicalWidth} and height is: ${physicalHeight}`);
         }
         
 
