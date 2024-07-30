@@ -1,0 +1,55 @@
+@use '../styles/variable' as *;
+
+.calculate_box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .calculator_input {
+        border: $accent-color;
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 260px;
+        height: 35px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-size: 20px;
+        font-weight: 550;
+        padding-left: 10px;
+    }
+    button {
+        font-weight: bold;
+        color: $background-color;
+        width: 90px;
+        height: 35px;
+        background-color: $main-color;
+        border: 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        // transition: box-shadow 2s ease-in-out;
+        transition: 0.3s;
+    }
+    button:hover {
+        background-color: $accent-color;
+    }
+    .to_inch_checkbox {
+        position: absolute;
+        // top: 0px;
+        right:-78px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+            width: auto;
+            height: auto;
+        }
+        h3 {
+            font-weight: 400;
+            font-size: 16px;
+            margin: 0 0 0 3px;
+        }
+    }
+}
+
+.highlight h3 {
+    color: $accent-color3;
+}
