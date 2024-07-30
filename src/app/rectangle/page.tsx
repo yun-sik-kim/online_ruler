@@ -1,6 +1,8 @@
-import styles from "./rectangle.module.css";
-import "./../globals.css"
 import { MeasureInput, Tooltip } from "./logics";
+
+import styles from "@/app/CSS/rectangle.module.css";
+import "@/app/CSS/globals.css"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
 import { faSquare, faCircle } from '@fortawesome/free-regular-svg-icons'

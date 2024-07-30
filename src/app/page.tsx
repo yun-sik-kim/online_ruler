@@ -1,24 +1,27 @@
-import { MeasureInput, Tooltip } from "./logics";
+import { UserInput } from "@/app/Model/UserInput";
+import { Tooltip } from "@/app/Model/Tooltip";
+import Link from "next/link";
+
+import styles from "@/app/CSS/ruler.module.css";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
 import { faSquare, faCircle } from '@fortawesome/free-regular-svg-icons'
-import styles from "./ruler.module.css";
-import Link from "next/link";
 
 export default function Home() {
   return (
     <div className='main_layout'>
       <div className={styles.ui_layout}>
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
-        <MeasureInput className={styles.calculate_box}>
+        <UserInput>
           <h3>to inch</h3>
-          <Tooltip className={styles.metric_tooltip}>
-            <h3>• cm to mm?</h3>
-            <p>1 cm = 10 mm</p>
-            <h3>• m to mm?</h3>
-            <p>1 m = 100 mm</p>
-          </Tooltip>
-        </MeasureInput>
+        </UserInput>
+        <Tooltip>
+          <h3>• cm to mm?</h3>
+          <p>1 cm = 10 mm</p>
+          <h3>• m to mm?</h3>
+          <p>1 m = 100 mm</p>
+        </Tooltip>
         <div id={styles.ruler_nav_layout}>
           <nav>
             <Link className={styles.icon} id={styles.current} href='/'>

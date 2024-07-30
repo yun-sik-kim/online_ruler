@@ -1,11 +1,9 @@
 'use client'
-import styles from "./ruler.module.css";
-import { useState, Fragment, useEffect } from 'react';
+import { useState, useEffect, ReactNode} from 'react';
 import { useRouter } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
+import styles from "@/app/CSS/ruler.module.css";
 
-export function MeasureInput({ className, children }) {
+export function UserInput({ children }: { children: ReactNode }) {
     const [lengthInput, setLengthInput] = useState('');
     const [inputMm, setInputMm] = useState(0);
     const [isInch, setIsInch] = useState(false);
@@ -67,17 +65,17 @@ export function MeasureInput({ className, children }) {
       setIsInch(!isInch);
     }
 
-    function mmToInch(mm) {
+    function mmToInch(mm: number) {
       let result = mm / 25.4;
       return result.toFixed(2);
     }
 
-    function inchToMm(inch) {
+    function inchToMm(inch: number) {
       return (inch * 25.4);
     }
 
     return (
-        <div className={className}>
+        <div className={styles.calculate_box}>
           <input
             className={styles.calculator_input}
             onChange={ handleInputChange }
@@ -97,17 +95,3 @@ export function MeasureInput({ className, children }) {
     );
 }
 
-export function Tooltip({ className, children }) {
-    const [isHelp, setIsHelp] = useState(false);
-
-    return (
-      <div className={className}
-        onMouseEnter={()=>{document.querySelector(`.${styles.details_tooltip}`).style.visibility = 'visible';}}
-        onMouseLeave={()=>{document.querySelector(`.${styles.details_tooltip}`).style.visibility = 'hidden';}}>
-        <FontAwesomeIcon icon={faCircleQuestion} /><span draggable="false">  cm?</span>
-        <div className={styles.details_tooltip}>
-          {children}
-        </div>
-      </div>
-    );
-}

@@ -44,8 +44,8 @@ body {
 .nav_bar .app_logo {
   margin-left: 15px;
   margin-right: 15px;
-  width: 46px;
-  height: 46px;
+  width: 2.875rem;
+  height: 2.875rem;
   filter: invert(86%) sepia(30%) saturate(218%) hue-rotate(108deg) brightness(106%) contrast(98%);
 }
 @media screen and (max-width: 768px) {

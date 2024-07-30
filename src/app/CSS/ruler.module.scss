@@ -77,9 +77,11 @@ $layout-color: #ffffff73;
     }
     .metric_tooltip {
         display: flex;
-        position: absolute;
-        top: 32px;
-        right: 378px;
+        position: relative;
+        top: 8px;
+        right: 150px;
+        align-items: center;
+        column-gap: 4px;
         .details_tooltip {
             visibility: hidden;
             position: absolute;

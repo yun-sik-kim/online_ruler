@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { Open_Sans, Montserrat_Subrayada } from "next/font/google";
-import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
+
+import "@/app/CSS/globals.css";
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
-export const open_sans = Open_Sans({ 
+const open_sans = Open_Sans({ 
   subsets: ["latin"],
   variable: '--font-open_sans',
 });
 
-export const montserrat_subrayada = Montserrat_Subrayada({ 
+const montserrat_subrayada = Montserrat_Subrayada({ 
   subsets: ["latin"],
   weight: ['400', '700'],
   variable: '--font-montserrat_subrayada',
@@ -37,8 +38,8 @@ export default function RootLayout({
         <nav className='nav_bar'>
         <Image className="app_logo"
           src="/ys.svg"
-          width={30}
-          height={30}
+          width={100}
+          height={100}
           alt="Logo"
         />
         <Link href="/" style={{ textDecoration: 'none' }}>

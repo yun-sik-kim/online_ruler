@@ -1,5 +1,5 @@
 'use client'
-import styles from "./rectangle.module.css";
+import styles from "@/app/CSS/rectangle.module.css";
 import { useState, Fragment, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
