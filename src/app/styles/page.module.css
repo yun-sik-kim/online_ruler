@@ -1,14 +1,23 @@
-.ui_layout {
+.main_layout {
+  width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 800px;
+  align-items: center;
+  row-gap: 10rem;
+}
+.main_layout .ui_layout {
+  display: flex;
+  flex-direction: column;
   position: relative;
+  width: 800px;
   background-color: rgba(255, 255, 255, 0.4509803922);
   color: #C6FCED;
   border-radius: 15px;
   align-items: center;
+  margin-top: 25vh;
 }
-.ui_layout h1 {
+.main_layout .ui_layout h1 {
   margin: 0px;
   padding: 20px;
   font-size: 45px;
@@ -17,24 +26,24 @@
   font-weight: 700;
   font-style: normal;
 }
-.ui_layout #ruler_nav_layout {
+.main_layout .ui_layout #ruler_nav_layout {
   margin-top: 36px;
   margin-bottom: 10px;
   z-index: 20;
   box-sizing: border-box;
 }
-.ui_layout #ruler_nav_layout #current {
+.main_layout .ui_layout #ruler_nav_layout #current {
   border-top: 3px solid #C6FCED;
   color: #5042C1;
 }
-.ui_layout #ruler_nav_layout nav {
+.main_layout .ui_layout #ruler_nav_layout nav {
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   box-shadow: black;
 }
-.ui_layout #ruler_nav_layout .icon {
+.main_layout .ui_layout #ruler_nav_layout .icon {
   color: rgba(81, 66, 193, 0.4941176471);
   font-size: 36px;
   text-decoration: none;
@@ -43,22 +52,22 @@
   text-decoration: none;
   transition: 0.3s;
 }
-.ui_layout #ruler_nav_layout .icon h2 {
+.main_layout .ui_layout #ruler_nav_layout .icon h2 {
   margin: 0px;
   padding-top: 6px;
   padding-bottom: 2px;
   font-weight: bold;
   font-size: 16px;
 }
-.ui_layout #ruler_nav_layout .icon p {
+.main_layout .ui_layout #ruler_nav_layout .icon p {
   margin: 0;
   font-size: 16px;
 }
-.ui_layout #ruler_nav_layout .icon:hover {
+.main_layout .ui_layout #ruler_nav_layout .icon:hover {
   color: #5042C1;
   border-top: 3px solid #C6FCED;
 }
-.ui_layout #ruler_nav_layout .icon:active {
+.main_layout .ui_layout #ruler_nav_layout .icon:active {
   color: #68BAA6;
 }
 
@@ -71,4 +80,4 @@
     top: 75px;
     color: blue;
   }
-}/*# sourceMappingURL=ruler.module.css.map */
+}/*# sourceMappingURL=page.module.css.map */

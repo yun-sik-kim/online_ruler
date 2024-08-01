@@ -1,9 +1,10 @@
 'use client'
 import { useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import styles from "./InputBox.module.css";
 
-export function InputBox({ children }: { children: ReactNode }) {
+export default function InputBox({ children }: { children: ReactNode }) {
     const [inputValue, setInputValue] = useState('');
     const [isInch, setIsInch] = useState(false);
     const [initialUnit, setInitialUnit] = useState<'mm' | 'inch'>('mm');
@@ -19,18 +20,17 @@ export function InputBox({ children }: { children: ReactNode }) {
       });
     };
 
-    const handleCalculate = (e) => {
+    const handleCalculate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.stopPropagation();
 
       if((parseFloat(inputValue) > 0)){
         if (!isInch) {
           alert(`success!!! input value in mm is ${inputValue}`);
-          router.push(`/calculate?inch=${isInch}&length=${inputValue}`);
+          router.push(`/calculate?type=ruler&inch=${isInch}&length=${inputValue}`);
         } else {
           alert(`success!!! input value in inch is ${inputValue}`);
-          router.push(`/calculate?inch=${isInch}&length=${inputValue}`);
+          router.push(`/calculate?type=ruler&inch=${isInch}&length=${inputValue}`);
         }
-        
       } else {
         alert("please write number above 0 only!");
         setInputValue('');
@@ -47,7 +47,24 @@ export function InputBox({ children }: { children: ReactNode }) {
       }
     }
 
-    const getPlaceholder = () => isInch ? 'inch' : 'mm';
+    const getPlaceholder = () => {
+      const searchParams = useSearchParams();
+      const length = searchParams.get('length') || null;
+
+      if (length === null) {
+        if (isInch) {
+          return 'inch'
+        } else {
+          return 'mm'
+        } 
+      } else {
+        if (isInch) {
+          return `${length.toString()}inch`
+        } else {
+          return `${length.toString()}mm`
+        } 
+      }
+    }
 
     const getDisplayValue = () => inputValue;
 
@@ -63,13 +80,15 @@ export function InputBox({ children }: { children: ReactNode }) {
 
     return (
         <div className={styles.calculate_box}>
-          <input
-            type="text"
-            className={styles.calculator_input}
-            placeholder={getPlaceholder()}
-            value={getDisplayValue()}
-            onChange={handleInputChange}
-          />
+          <div className={styles.input_box}>
+            <input
+              type="text"
+              className={styles.calculator_input}
+              placeholder={getPlaceholder()}
+              value={getDisplayValue()}
+              onChange={handleInputChange}
+            />
+          </div>
           <button onClick={handleCalculate}>
             calculate!
           </button>

@@ -10,14 +10,6 @@ import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
 //     title.innerHTML = 'online ruler';
 //     // alert(title);
 // }, 1000);
-function mmToInch(mm) {
-    let result = mm / 25.4;
-    return result.toFixed(2);
-  }
-
-  function inchToMm(inch) {
-    return (inch * 25.4);
-  }
 
 export function MeasureInput({ className, children }) {
     const [lengthInput, setLengthInput] = useState('');

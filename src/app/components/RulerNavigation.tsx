@@ -1,35 +1,23 @@
-import RecInputBox from "../components/RecInputBox";
-import Tooltip from "../components/Tooltip";
-
+'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
 import { faSquare, faCircle } from '@fortawesome/free-regular-svg-icons'
+import styles from "./page.module.css";
 import Link from "next/link";
 
-import styles from "../styles/page.module.css";
 
-export default function Home() {
-  return (
-    <div className={styles.main_layout}>
-      <div className={styles.ui_layout}>
-        <h1>Measure anything, anywhere with our handy online ruler!</h1>
-        <RecInputBox>
-          <h3>to inch</h3>
-          <Tooltip style={{ top: '67px' }}>
-            <h3>• cm to mm?</h3>
-            <p>1 cm = 10 mm</p>
-            <h3>• m to mm?</h3>
-            <p>1 m = 100 mm</p>
-          </Tooltip>
-        </RecInputBox>
+
+export default function RulerNavigation() {
+
+    return (
         <div id={styles.ruler_nav_layout}>
           <nav>
-            <Link className={styles.icon} href='/'>
+            <Link className={styles.icon} id={styles.current} href='/'>
               <FontAwesomeIcon icon={faRuler} />
               <h2>ruler</h2>
               <p>straight line, set your length</p>
-            </Link>
-            <Link className={styles.icon} id={styles.current} href='/rectangle'>
+            </Link>         
+            <Link className={styles.icon} href='/rectangle'>
               <FontAwesomeIcon icon={faSquare} />
               <h2>2d box</h2>
               <p>2d rectangle, set your width and height</p>
@@ -46,7 +34,5 @@ export default function Home() {
             </Link>
           </nav>
         </div>
-      </div>
-    </div>
-  );
+    )
 }

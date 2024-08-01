@@ -2,9 +2,14 @@
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
-.calculate_box .calculator_input {
+.calculate_box .input_box {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.calculate_box .input_box .calculator_input {
   border: #68BAA6;
   border-radius: 5px;
   box-sizing: border-box;
@@ -31,6 +36,7 @@
 }
 .calculate_box .to_inch_checkbox {
   position: absolute;
+  top: 6px;
   right: -78px;
   display: flex;
   justify-content: center;

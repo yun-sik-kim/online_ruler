@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons'
 import styles from './Tooltip.module.css';
 
-export function Tooltip({ children }: { children: ReactNode }) {
+export default function Tooltip({ children, style }: { children: ReactNode, style?: React.CSSProperties }) {
     const [isVisible, setIsVisible] = useState(false);
 
     return (
         <div className={styles.metric_tooltip}
+            style={style}
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
         >

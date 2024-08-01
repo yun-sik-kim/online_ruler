@@ -1,14 +1,16 @@
-import { InputBox } from "./components/InputBox";
-import { Tooltip } from "./components/Tooltip";
+import InputBox from "./components/InputBox";
+import Tooltip from "./components/Tooltip";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
 import { faSquare, faCircle } from '@fortawesome/free-regular-svg-icons'
-import styles from "./ruler.module.css";
+
+import styles from "./styles/page.module.css";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className='main_layout'>
+    <div className={styles.main_layout}>
       <div className={styles.ui_layout}>
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
         <InputBox>
@@ -45,10 +47,6 @@ export default function Home() {
           </nav>
         </div>
       </div>
-      
-
-      {/* <CalculatorInputLayout /> */}
-      {/* <ShowRuler /> */}
     </div>
   );
 }

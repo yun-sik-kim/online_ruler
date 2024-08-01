@@ -1,0 +1,27 @@
+// @import "./../ruler.module.scss";
+
+@use '../styles/variable' as *;
+
+
+.ruler_ui_layout {
+    position: relative;
+
+    width: 100vw;
+    height: 200vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .ruler_box {
+        padding: 0px 10px 0px 10px;
+        // padding: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        background-color: $layout-color;
+        border-radius: 15px;
+    }
+}
