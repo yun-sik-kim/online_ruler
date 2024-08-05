@@ -28,7 +28,7 @@ export default function Calibrator() {
         // Load data from localStorage when component mounts
         const storedData = localStorage.getItem(STORAGE_KEY);
         if (storedData) {
-            console.log(`Hi${parseFloat(storedData).toFixed(2)}`)
+            console.log(`Calibrator.tsx storedData: ${parseFloat(storedData).toFixed(2)}`)
         }
         if (storedData) {
             const parsedData = parseFloat(storedData);
