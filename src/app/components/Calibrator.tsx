@@ -10,8 +10,8 @@ export default function Calibrator() {
     const USB_A_CONSTANT = 30;
     const USB_C_CONSTANT = 22;
     // >>>FIX<<< change min and MAX_VAR after test to different monitor sizes!
-    const MIN_VAR = 2.352;
-    const MAX_VAR = 6.250;
+    const MIN_VAR = 0.31 * 0.4;     // 0.31 = 0.1 inch 
+    const MAX_VAR = 0.31 * 43;      // 0.31 = 0.1 inch 
 
     const [calibrationData, setCalibrationData] = useState('');
     const [toggleSetting, setToggleSetting] = useState(false);
@@ -67,7 +67,12 @@ export default function Calibrator() {
     }
 
     const determineDisplaySize = (value: number) => {
-        if (value > 5.075 && value < 5.085) {
+        if (value > 4.455 && value < 4.475) {
+            setDisplayInch(15.6);
+            // console.log(`displayInch is :${displayInch}`)
+        } else if (value > 4.765 && value < 4.785) {
+            setDisplayInch(15.5); 
+        } else if (value > 5.075 && value < 5.095) {
             setDisplayInch(15.4);
         } else {
             setDisplayInch(14.0);
@@ -133,7 +138,7 @@ export default function Calibrator() {
                 type='range'
                 min={MIN_VAR}
                 max={MAX_VAR}
-                step="0.01"
+                step="0.31"
                 value={sizeConstant}
                 onChange={handleSliderChange}
             ></input>

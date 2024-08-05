@@ -15,11 +15,11 @@ export default function RulerUI() {
 
     const [screenWidth, setScreenWidth] = useState(0);
     const [screenHeight, setScreenHeight] = useState(0);
+    const [ratio, setRatio] = useState(0);
     let userInput: number[] = [NaN, NaN, NaN];  // 1: inputLength 2: inputWidth 3: inputHeight
     const unit = (searchParams.get('inch') === 'false') ? 'mm' : 'inch';
     const type = searchParams.get('type') || 'ruler';
     //TODO: use this ratio to adjust ruler length
-    let ratio = 0;
 
     if (searchParams.get('length')) {
       userInput[0] = Number(searchParams.get('length')) || 0;
@@ -60,10 +60,11 @@ export default function RulerUI() {
         const storedData = localStorage.getItem(STORAGE_KEY);
         if (storedData) {
             const parsedData = parseFloat(storedData);
-            console.log(`storedData is: ${storedData}`)
+            console.log(`RulerUI.tsx storedData is: ${storedData}`)
             if (!isNaN(parsedData)) {
-              ratio = parsedData;
-              console.log(`parsedData is: ${parsedData}`)
+              setRatio(parsedData);
+              console.log(`RulerUI.tsx parsedData is: ${parsedData}`)
+              console.log(`RulerUI.tsx ratio is: ${ratio}`)
             }
         }
     }, []);

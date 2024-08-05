@@ -23,6 +23,8 @@ export default function CanvasRuler({type, rulerUnit, userInput, deviceRatio, br
     const input: number[] = userInput;
     const unit= rulerUnit;
 
+    console.log(`ratio: ${ratio}`);
+
     // NOTE width and height ratio should be synchronous to CanvasRuler.module.css
     const width = browserWidth * 0.95;
     const height = type === 'ruler' ? browserHeight * 0.2 : browserHeight;
