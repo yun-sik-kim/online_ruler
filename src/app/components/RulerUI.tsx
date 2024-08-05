@@ -19,7 +19,7 @@ export default function RulerUI() {
     const unit = (searchParams.get('inch') === 'false') ? 'mm' : 'inch';
     const type = searchParams.get('type') || 'ruler';
     //TODO: use this ratio to adjust ruler length
-    let ratio = 5.08;
+    let ratio = 0;
 
     if (searchParams.get('length')) {
       userInput[0] = Number(searchParams.get('length')) || 0;
@@ -59,13 +59,11 @@ export default function RulerUI() {
          // Load data from localStorage when component mounts
         const storedData = localStorage.getItem(STORAGE_KEY);
         if (storedData) {
-            console.log(`Hi${parseFloat(storedData).toFixed(2)}`)
-        }
-        if (storedData) {
             const parsedData = parseFloat(storedData);
             console.log(`storedData is: ${storedData}`)
             if (!isNaN(parsedData)) {
               ratio = parsedData;
+              console.log(`parsedData is: ${parsedData}`)
             }
         }
     }, []);
