@@ -1,4 +1,9 @@
-.canvas {
+.canvas_ruler {
   width: 95vw;
   height: 20vh;
+}
+
+.canvas_2d {
+  width: 95vw;
+  height: 100vh; 
 }

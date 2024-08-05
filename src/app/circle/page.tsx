@@ -1,30 +1,35 @@
-import { MeasureInput, Tooltip } from "./logics";
+import CircInputBox from "../components/CircInputBox";
+import Tooltip from "../components/Tooltip";
+import Calibrator from "../components/Calibrator";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
 import { faSquare, faCircle } from '@fortawesome/free-regular-svg-icons'
-import styles from "./circle.module.css";
 import Link from "next/link";
+
+import styles from "../styles/page.module.css";
 
 export default function Home() {
   return (
-    <div className='main_layout'>
+    <div className={styles.main_layout}>
       <div className={styles.ui_layout}>
+        <Calibrator />
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
-        <MeasureInput className={styles.calculate_box}>
+        <CircInputBox>
           <h3>to inch</h3>
-        </MeasureInput>
-        <Tooltip className={styles.metric_tooltip}>
-          <h3>• cm to mm?</h3>
-          <p>1 cm = 10 mm</p>
-          <h3>• m to mm?</h3>
-          <p>1 m = 100 mm</p>
-        </Tooltip>
+          <Tooltip>
+            <h3>• cm to mm?</h3>
+            <p>1 cm = 10 mm</p>
+            <h3>• m to mm?</h3>
+            <p>1 m = 100 mm</p>
+          </Tooltip>
+        </CircInputBox>
         <div id={styles.ruler_nav_layout}>
           <nav>
             <Link className={styles.icon} href='/'>
               <FontAwesomeIcon icon={faRuler} />
               <h2>ruler</h2>
-              <p>straight line</p>
+              <p>straight line, set your length</p>
             </Link>
             <Link className={styles.icon} href='/rectangle'>
               <FontAwesomeIcon icon={faSquare} />
@@ -43,11 +48,10 @@ export default function Home() {
             </Link>
           </nav>
         </div>
+        <p style={{position:'absolute', fontSize:'10px', bottom:'-22px'}}>
+          Accuracy can vary depending on your device’s screen settings. You can calibrate the ruler to match your specific screen.
+        </p>
       </div>
-      
-
-      {/* <CalculatorInputLayout /> */}
-      {/* <ShowRuler /> */}
     </div>
   );
 }

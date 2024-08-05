@@ -2,28 +2,38 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import CanvasRuler from './Canvas/CanvasRuler';
-// import { RulerType } from "../types/RulerType";
+import { motion } from "framer-motion"
 
 import styles from "./RulerUI.module.css";
+
+const STORAGE_KEY = 'calibrationData';
 
 //TO DO: set a timer that initial looks like main page, 
 // and pop up the ShowRuler with visual while scroll down.
 export default function RulerUI() {
     const searchParams = useSearchParams();
 
-    const screenWidth  = window.screen.width;
-    const screenHeight = window.screen.height;
-    const userInput = Number(searchParams.get('length')) || 0;
+    const [screenWidth, setScreenWidth] = useState(0);
+    const [screenHeight, setScreenHeight] = useState(0);
+    let userInput: number[] = [NaN, NaN, NaN];  // 1: inputLength 2: inputWidth 3: inputHeight
     const unit = (searchParams.get('inch') === 'false') ? 'mm' : 'inch';
     const type = searchParams.get('type') || 'ruler';
-
     //TODO: use this ratio to adjust ruler length
-    let ratio = 9.5;
+    let ratio = 5.08;
+
+    if (searchParams.get('length')) {
+      userInput[0] = Number(searchParams.get('length')) || 0;
+      console.log(`userInput[0] is: ${userInput[0]}`)
+    } else if (searchParams.get('width')) {
+      userInput[1] = Number(searchParams.get('width')) || 0;
+      userInput[2] = Number(searchParams.get('height')) || 0;
+    }
 
     useEffect(()=>{
-      const diagonal = findDisplaySize();
+      // const diagonal = findDisplaySize();
       // const AR = findAR();
-      const AR = estimateScreenSizeFromRatio();
+      // const AR = estimateScreenSizeFromRatio();
+
       // const height = calculateHeight(diagonal, AR);
       // const Width = calculateWidth(height, AR);
 
@@ -42,6 +52,22 @@ export default function RulerUI() {
         //     const physicalWidth = AR * physicalHeight;
         //     console.log(`your computer's physical width is:${physicalWidth} and height is: ${physicalHeight}`);
         // }
+
+        setScreenWidth(window.screen.width);
+        setScreenHeight(window.screen.height);
+
+         // Load data from localStorage when component mounts
+        const storedData = localStorage.getItem(STORAGE_KEY);
+        if (storedData) {
+            console.log(`Hi${parseFloat(storedData).toFixed(2)}`)
+        }
+        if (storedData) {
+            const parsedData = parseFloat(storedData);
+            console.log(`storedData is: ${storedData}`)
+            if (!isNaN(parsedData)) {
+              ratio = parsedData;
+            }
+        }
     }, []);
 
 

@@ -1,0 +1,75 @@
+@use '../styles/variable' as *;
+$height: 550px;
+
+.card_layout {
+    position: absolute;
+    height: $height;
+    width: 350px;
+    left: -350px;
+
+    display: flex;
+    // background-color: blue;
+
+    .computer_size {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background-color: $layout-color;
+        border-radius: $border-radius;
+        top: -51px;
+        right: -114px;
+        padding: 6px;
+        font-size: 16px;
+        
+        .settings_icon {
+            transition: transform 0.3s ease;
+        }
+        .settings_icon:hover {
+            transform: rotate(90deg);
+        }
+    }
+    
+    .vertical_slider {
+        /* -webkit-appearance: none;
+        appearance: none; */
+        position: relative;
+        left: 178px;
+        top: 187px;
+        width: 300px;
+        height: 25px;
+        transform: rotate(-90deg);
+    }
+    
+    .card_box {
+        position: absolute;
+        height: $height;
+        top: -71px;
+        right: 40px;
+        aspect-ratio: 1 / 1.5857;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        
+        .card {
+            border-radius: 9px;
+            // background-color: white;
+            height: 120px;
+            aspect-ratio: 1 / 1.5857;
+
+            .item_list {
+                position: absolute;
+                width: 10rem;
+                height: 2rem;
+                display: flex;
+                gap: 2px;
+                // background-color: aqua;
+                .item {
+                    position: relative;
+                    top: -33px;
+                    left: 12px;
+                }
+            }
+        }
+    }
+}

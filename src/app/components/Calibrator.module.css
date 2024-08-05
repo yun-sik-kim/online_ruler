@@ -1,0 +1,62 @@
+.card_layout {
+  position: absolute;
+  height: 550px;
+  width: 350px;
+  left: -350px;
+  display: flex;
+}
+.card_layout .computer_size {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.4509803922);
+  border-radius: 9px;
+  top: -51px;
+  right: -114px;
+  padding: 6px;
+  font-size: 16px;
+}
+.card_layout .computer_size .settings_icon {
+  transition: transform 0.3s ease;
+}
+.card_layout .computer_size .settings_icon:hover {
+  transform: rotate(90deg);
+}
+.card_layout .vertical_slider {
+  /* -webkit-appearance: none;
+  appearance: none; */
+  position: relative;
+  left: 178px;
+  top: 187px;
+  width: 300px;
+  height: 25px;
+  transform: rotate(-90deg);
+}
+.card_layout .card_box {
+  position: absolute;
+  height: 550px;
+  top: -71px;
+  right: 40px;
+  aspect-ratio: 1/1.5857;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.card_layout .card_box .card {
+  border-radius: 9px;
+  height: 120px;
+  aspect-ratio: 1/1.5857;
+}
+.card_layout .card_box .card .item_list {
+  position: absolute;
+  width: 10rem;
+  height: 2rem;
+  display: flex;
+  gap: 2px;
+}
+.card_layout .card_box .card .item_list .item {
+  position: relative;
+  top: -33px;
+  left: 12px;
+}/*# sourceMappingURL=Calibrator.module.css.map */

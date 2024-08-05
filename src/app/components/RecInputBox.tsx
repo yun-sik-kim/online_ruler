@@ -41,21 +41,30 @@ export default function RecInputBox({ children }: { children: ReactNode }) {
       }
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
       if (newValue === '') {
         setInputWidth('');
-        setInputHeight('');
         setInitialUnit(isInch ? 'inch' : 'mm');
       } else {
         setInputWidth(newValue);
+      }
+    }
+
+    const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      if (newValue === '') {
+        setInputHeight('');
+        setInitialUnit(isInch ? 'inch' : 'mm');
+      } else {
         setInputHeight(newValue);
       }
     }
 
     const getPlaceholder = () => isInch ? 'inch' : 'mm';
 
-    const getDisplayValue = () => inputWidth;
+    const getDisplayWidth = () => inputWidth;
+    const getDisplayHeight = () => inputHeight;
 
     function mmToInch(mm: string) {
       let result = parseFloat(mm) / 25.4;
@@ -73,16 +82,16 @@ export default function RecInputBox({ children }: { children: ReactNode }) {
                 <input
                     type="text"
                     className={styles.calculator_input}
-                    placeholder={getPlaceholder()}
-                    value={getDisplayValue()}
-                    onChange={handleInputChange}
+                    placeholder={`(width) ${getPlaceholder()}`}
+                    value={getDisplayWidth()}
+                    onChange={handleWidthChange}
                 />
                 <input
                     type="text"
                     className={styles.calculator_input}
-                    placeholder={getPlaceholder()}
-                    value={getDisplayValue()}
-                    onChange={handleInputChange}
+                    placeholder={`(height) ${getPlaceholder()}`}
+                    value={getDisplayHeight()}
+                    onChange={handleHeightChange}
                 />
             </div>
             <button onClick={handleCalculate}>

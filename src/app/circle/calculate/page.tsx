@@ -1,4 +1,4 @@
-import RecInputBox from "../../components/RecInputBox";
+import CircInputBox from "@/app/components/CircInputBox";
 import Tooltip from "../../components/Tooltip";
 import RulerUI from "../../components/RulerUI";
 import Calibrator from "@/app/components/Calibrator";
@@ -16,15 +16,15 @@ export default function Home() {
       <div className={styles.ui_layout}>
         <Calibrator />
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
-        <RecInputBox>
+        <CircInputBox>
           <h3>to inch</h3>
-          <Tooltip style={{ top: '67px' }}>
+          <Tooltip>
             <h3>• cm to mm?</h3>
             <p>1 cm = 10 mm</p>
             <h3>• m to mm?</h3>
             <p>1 m = 100 mm</p>
           </Tooltip>
-        </RecInputBox>
+        </CircInputBox>
         <div id={styles.ruler_nav_layout}>
           <nav>
             <Link className={styles.icon} href='/'>
@@ -32,12 +32,12 @@ export default function Home() {
               <h2>ruler</h2>
               <p>straight line, set your length</p>
             </Link>
-            <Link className={styles.icon} id={styles.current} href='/rectangle'>
+            <Link className={styles.icon} href='/rectangle'>
               <FontAwesomeIcon icon={faSquare} />
               <h2>2d box</h2>
               <p>2d rectangle, set your width and height</p>
             </Link>
-            <Link className={styles.icon} href='/circle'>
+            <Link className={styles.icon} id={styles.current} href='/circle'>
               <FontAwesomeIcon icon={faCircle} />
               <h2>2d circle</h2>
               <p>round circle, set your radius</p>

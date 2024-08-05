@@ -1,6 +1,7 @@
 import InputBox from "../components/InputBox";
 import Tooltip from "../components/Tooltip";
 import RulerUI from "../components/RulerUI";
+import Calibrator from "../components/Calibrator";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRuler, faCube } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <div className={styles.main_layout}>
       <div className={styles.ui_layout}>
+        <Calibrator />
         <h1>Measure anything, anywhere with our handy online ruler!</h1>
         <InputBox>
           <h3>to inch</h3>
@@ -48,6 +50,9 @@ export default function Home() {
             </Link>
           </nav>
         </div>
+        <p style={{position:'absolute', fontSize:'10px', bottom:'-22px'}}>
+          Accuracy can vary depending on your device’s screen settings. You can calibrate the ruler to match your specific screen.
+        </p>
       </div>
       <RulerUI />
     </div>
