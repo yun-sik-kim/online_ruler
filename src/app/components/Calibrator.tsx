@@ -6,81 +6,50 @@ import Image from 'next/image';
 const STORAGE_KEY = 'calibrationData';
 
 export default function Calibrator() {
-    const MULTIPLY_CONSTANT = 86.5;
-    const USB_A_CONSTANT = 30;
-    const USB_C_CONSTANT = 22;
-    // >>>FIX<<< change min and MAX_VAR after test to different monitor sizes!
-    const MIN_VAR = 0.31 * 0.4;     // 0.31 = 0.1 inch 
-    const MAX_VAR = 0.31 * 43;      // 0.31 = 0.1 inch 
+    const CARD_CONSTANT = 28.5;
+    const USB_A_CONSTANT = 10;
+    const USB_C_CONSTANT = 7.5;
 
-    const [calibrationData, setCalibrationData] = useState('');
+    const MIN_INCH_VAR = 7.9;     // 0.31 = 0.1 inch 
+    const MAX_INCH_VAR = 50;      // 0.31 = 0.1 inch 
+
     const [toggleSetting, setToggleSetting] = useState(false);
-    const [sizeConstant, setSizeConstant] = useState((MIN_VAR + MAX_VAR / 2));
     const [displayInch, setDisplayInch] = useState(0);
 
     const [currentItem, setCurrentItem] = useState('card');
-    const [cardSize, setCardSize] = useState(sizeConstant * MULTIPLY_CONSTANT);
-    const [usbASize, setusbASize] = useState(sizeConstant * USB_A_CONSTANT);
-    const [usbCSize, setusbCSize] = useState(sizeConstant * MULTIPLY_CONSTANT);
-
+    const [cardSize, setCardSize] = useState(CARD_CONSTANT);
+    const [usbASize, setusbASize] = useState(USB_A_CONSTANT);
+    const [usbCSize, setusbCSize] = useState(CARD_CONSTANT);
 
     useEffect(() => {
         // Load data from localStorage when component mounts
         const storedData = localStorage.getItem(STORAGE_KEY);
         if (storedData) {
-            console.log(`Calibrator.tsx storedData: ${parseFloat(storedData).toFixed(2)}`)
-        }
-        if (storedData) {
             const parsedData = parseFloat(storedData);
-            console.log(storedData)
             if (!isNaN(parsedData)) {
-                setCalibrationData(storedData);
-                setSizeConstant(parsedData);
-                determineDisplaySize(parsedData);
-
-                setCardSize(parsedData * MULTIPLY_CONSTANT);
+                setDisplayInch(parsedData);
+                setCardSize(parsedData * CARD_CONSTANT);
                 setusbASize(parsedData * USB_A_CONSTANT)
                 setusbCSize(parsedData * USB_C_CONSTANT)
+                console.log(`initial local storage is: ${localStorage.getItem(STORAGE_KEY)}`);
             }
         }
     }, []);
     
 
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const parsedValue = parseFloat(e.target.value);
-        setSizeConstant( parsedValue);
-        setCardSize( parsedValue * MULTIPLY_CONSTANT );
-        setusbASize( parsedValue * USB_A_CONSTANT );
-        setusbCSize( parsedValue * USB_C_CONSTANT );
-
-        determineDisplaySize(parseFloat(e.target.value));
-
-        // Update state
-        setCalibrationData(e.target.value);
         // Save to localStorage
         localStorage.setItem(STORAGE_KEY, e.target.value);
-        console.log(localStorage.getItem(STORAGE_KEY));
+
+        const parsedValue = parseFloat(e.target.value);
+        setDisplayInch(parsedValue);
+        setCardSize(parsedValue * CARD_CONSTANT);
+        setusbASize(parsedValue * USB_A_CONSTANT);
+        setusbCSize(parsedValue * USB_C_CONSTANT);
     };
 
     const handleSettingsClick = () => {
         setToggleSetting(!toggleSetting);
-    }
-
-    const determineDisplaySize = (value: number) => {
-        if (value > 4.455 && value < 4.475) {
-            setDisplayInch(15.6);
-            // console.log(`displayInch is :${displayInch}`)
-        } else if (value > 4.765 && value < 4.785) {
-            setDisplayInch(15.5); 
-        } else if (value > 5.075 && value < 5.095) {
-            setDisplayInch(15.4);
-        } else {
-            setDisplayInch(14.0);
-        }
-    };
-
-    const handleItem = () => {
-
     }
 
     let currentImage;
@@ -136,10 +105,10 @@ export default function Calibrator() {
                 style={toggleSetting ? {} : {display: 'none'}}
                 className={styles.vertical_slider} 
                 type='range'
-                min={MIN_VAR}
-                max={MAX_VAR}
-                step="0.31"
-                value={sizeConstant}
+                min={MIN_INCH_VAR}
+                max={MAX_INCH_VAR}
+                step="0.1"
+                value={displayInch}
                 onChange={handleSliderChange}
             ></input>
             <h2 className={styles.computer_size}>

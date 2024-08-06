@@ -12,18 +12,18 @@ interface CanvasRulerProps {
     type: string;
     rulerUnit: string;
     userInput: number[];
-    deviceRatio: number;
+    drawingScale: number;
     browserWidth: number;
     browserHeight: number;
 }
 
-export default function CanvasRuler({type, rulerUnit, userInput, deviceRatio, browserWidth, browserHeight}: CanvasRulerProps ) {
+export default function CanvasRuler({type, rulerUnit, userInput, drawingScale, browserWidth, browserHeight}: CanvasRulerProps ) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const ratio = deviceRatio;
+    const ratio = drawingScale;
     const input: number[] = userInput;
     const unit= rulerUnit;
 
-    console.log(`ratio: ${ratio}`);
+    console.log(`CanvasRuler.tsx scale is: ${ratio}`);
 
     // NOTE width and height ratio should be synchronous to CanvasRuler.module.css
     const width = browserWidth * 0.95;
