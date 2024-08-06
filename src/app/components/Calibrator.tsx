@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import styles from './Calibrator.module.css'
 import Image from 'next/image';
 
@@ -86,7 +86,8 @@ export default function Calibrator() {
     }
 
     return (
-        <div className={styles.card_layout}>
+        <Suspense>
+            <div className={styles.card_layout}>
             <div className={styles.card_box} style={toggleSetting ? {} : {display: 'none'}}>
                 <div className={styles.card}
                 style={{ 
@@ -124,6 +125,7 @@ export default function Calibrator() {
                 onClick={handleSettingsClick}
                 />
             </h2>
-        </div>        
+        </div>
+        </Suspense>        
     )
 }

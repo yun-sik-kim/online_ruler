@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import CanvasRuler from './Canvas/CanvasRuler';
 import { motion } from "framer-motion"
@@ -68,6 +68,7 @@ export default function RulerUI() {
 
 
     return (
+      <Suspense>
         <div className={styles.ruler_ui_layout}>
             <div className={styles.ruler_box}>
               <CanvasRuler 
@@ -80,6 +81,7 @@ export default function RulerUI() {
               />
             </div>
         </div>
+      </Suspense>
     );
 }
 

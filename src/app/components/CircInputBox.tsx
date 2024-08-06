@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, ReactNode, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import styles from "./InputBox.module.css";
@@ -9,6 +9,8 @@ export default function CircInputBox({ children }: { children: ReactNode }) {
     const [isInch, setIsInch] = useState(false);
     const [initialUnit, setInitialUnit] = useState<'mm' | 'inch'>('mm');
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const length = searchParams.get('length') || null;
 
     const toggleUnit = () => {
       setIsInch((prevIsInch) => {
@@ -48,9 +50,6 @@ export default function CircInputBox({ children }: { children: ReactNode }) {
     }
 
     const getPlaceholder = () => {
-      const searchParams = useSearchParams();
-      const length = searchParams.get('length') || null;
-
       if (length === null) {
         if (isInch) {
           return '(radius) inch'
@@ -79,23 +78,25 @@ export default function CircInputBox({ children }: { children: ReactNode }) {
     }
 
     return (
-        <div className={styles.calculate_box}>
-          <div className={styles.input_box}>
-            <input
-              type="text"
-              className={styles.calculator_input}
-              placeholder={getPlaceholder()}
-              value={getDisplayValue()}
-              onChange={handleInputChange}
-            />
+        <Suspense>
+          <div className={styles.calculate_box}>
+            <div className={styles.input_box}>
+              <input
+                type="text"
+                className={styles.calculator_input}
+                placeholder={getPlaceholder()}
+                value={getDisplayValue()}
+                onChange={handleInputChange}
+              />
+            </div>
+            <button onClick={handleCalculate}>
+              calculate!
+            </button>
+            <div className={`${styles.to_inch_checkbox} ${isInch ? styles.highlight : ''}`}>
+              <input type="checkbox" checked={isInch} onChange={toggleUnit} />
+              {children}
+            </div>
           </div>
-          <button onClick={handleCalculate}>
-            calculate!
-          </button>
-          <div className={`${styles.to_inch_checkbox} ${isInch ? styles.highlight : ''}`}>
-            <input type="checkbox" checked={isInch} onChange={toggleUnit} />
-            {children}
-          </div>
-        </div>
+        </Suspense>
     );
 }

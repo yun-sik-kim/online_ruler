@@ -28,26 +28,26 @@ export default function CanvasRuler({type, rulerUnit, userInput, drawingScale, b
     // NOTE width and height ratio should be synchronous to CanvasRuler.module.css
     const width = browserWidth * 0.95;
     const height = type === 'ruler' ? browserHeight * 0.2 : browserHeight;
-    let canvasClassName;
+    // let canvasClassName;
     
     useEffect(()=>{
         if (canvasRef.current) {
             switch (type) {
                 case 'ruler':
                     new Ruler(canvasRef.current, width, height, unit, ratio, input[0]);
-                    canvasClassName = styles.canvas_ruler;
+                    // canvasClassName = styles.canvas_ruler;
                     break;
                 case 'rec':
                     new Rectangle(canvasRef.current, width, height, unit, ratio, input[1], input[2]);
-                    canvasClassName = styles.canvas_2d;
+                    // canvasClassName = styles.canvas_2d;
                     break;
                 case 'circ':
                     new Circle(canvasRef.current, width, height, unit, ratio, input[0]);
-                    canvasClassName = styles.canvas_2d;
+                    // canvasClassName = styles.canvas_2d;
                     break;
             }
         }
-    }, [input])
+    }, [type, width, height, unit, ratio, input])
 
     return (
         <canvas 

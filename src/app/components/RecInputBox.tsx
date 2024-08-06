@@ -1,6 +1,6 @@
 'use client'
-import { useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, ReactNode, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import styles from "./InputBox.module.css";
 
@@ -11,6 +11,7 @@ export default function RecInputBox({ children }: { children: ReactNode }) {
     const [isInch, setIsInch] = useState(false);
     const [initialUnit, setInitialUnit] = useState<'mm' | 'inch'>('mm');
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const toggleUnit = () => {
       setIsInch((prevIsInch) => {
@@ -28,10 +29,10 @@ export default function RecInputBox({ children }: { children: ReactNode }) {
 
       if((parseFloat(inputWidth) > 0) || (parseFloat(inputHeight) > 0)){
         if (!isInch) {
-          alert(`success!!! input value in mm is ${inputWidth} and ${inputHeight}`);
+          // alert(`success!!! input value in mm is ${inputWidth} and ${inputHeight}`);
           router.push(`/rectangle/calculate?type=rec&inch=${isInch}&width=${inputWidth}&height=${inputHeight}`);
         } else {
-          alert(`success!!! input value in inch is ${inputWidth} and ${inputHeight}`);
+          // alert(`success!!! input value in inch is ${inputWidth} and ${inputHeight}`);
           router.push(`/rectangle/calculate?type=rec&inch=${isInch}&width=${inputWidth}&height=${inputHeight}`);
         }
       } else {
@@ -61,7 +62,42 @@ export default function RecInputBox({ children }: { children: ReactNode }) {
       }
     }
 
-    const getPlaceholder = () => isInch ? 'inch' : 'mm';
+    const getWidthPlaceholder = () => {
+      const width = searchParams.get('width') || null;
+
+      if (width === null) {
+        if (isInch) {
+          return 'inch'
+        } else {
+          return 'mm'
+        } 
+      } else {
+        if (isInch) {
+          return `${width.toString()}inch`
+        } else {
+          return `${width.toString()}mm`
+        } 
+      }
+    }
+
+    const getHeightPlaceholder = () => {
+      const height = searchParams.get('height') || null;
+
+      if (height === null) {
+        if (isInch) {
+          return 'inch'
+        } else {
+          return 'mm'
+        } 
+      } else {
+        if (isInch) {
+          return `${height.toString()}inch`
+        } else {
+          return `${height.toString()}mm`
+        } 
+      }
+    }
+
 
     const getDisplayWidth = () => inputWidth;
     const getDisplayHeight = () => inputHeight;
@@ -82,14 +118,14 @@ export default function RecInputBox({ children }: { children: ReactNode }) {
                 <input
                     type="text"
                     className={styles.calculator_input}
-                    placeholder={`(width) ${getPlaceholder()}`}
+                    placeholder={getWidthPlaceholder()}
                     value={getDisplayWidth()}
                     onChange={handleWidthChange}
                 />
                 <input
                     type="text"
                     className={styles.calculator_input}
-                    placeholder={`(height) ${getPlaceholder()}`}
+                    placeholder={getHeightPlaceholder()}
                     value={getDisplayHeight()}
                     onChange={handleHeightChange}
                 />
